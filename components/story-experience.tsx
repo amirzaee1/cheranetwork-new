@@ -638,6 +638,14 @@ export default function StoryExperience() {
           if (preloader.complete && preloader.naturalWidth > 0) commit();
           else preloader.addEventListener("load", commit, { once: true });
         };
+        const syncVisual = (shot?: HTMLElement | null) => {
+          const next =
+            shot?.dataset.visualSrc ||
+            shot?.getAttribute("src") ||
+            "";
+
+          showVisual(next);
+        };
         ctx = gsap.context(() => {
           gsap.utils.toArray<HTMLElement>(".reveal").forEach((el) =>
             gsap.fromTo(
